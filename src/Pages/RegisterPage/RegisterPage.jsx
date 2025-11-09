@@ -9,14 +9,19 @@ const RegisterPage = () => {
   const [showPass, setShowPass] = useState(false);
 
   // Auth context info
-  const { loginWithGoogle, setLoading } = use(AuthContext);
+  const {
+    loginWithGoogle,
+    registerUserEmailPassword,
+    userProfileUpdate,
+    setLoading,
+  } = use(AuthContext);
 
   // Navigate
   const navigate = useNavigate();
 
   // Handle google login
   const handleGoogleLogin = () => {
-    // setLoading(true);
+    setLoading(true);
     loginWithGoogle()
       .then(() => {
         toast.success("User Successfully Login");
@@ -25,6 +30,39 @@ const RegisterPage = () => {
       })
       .catch((error) => {
         console.log("Google Login Error:", error.message);
+      });
+  };
+
+  // Login withEmailPassword
+  const handleLoginEmailPassword = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    // Get input field
+    const displayName = e.target.name.value;
+    const email = e.target.email.value;
+    const photoURL = e.target.photo.value;
+    const password = e.target.email.value;
+
+    // Set displayName & photoUrl
+    const userProfile = { displayName, photoURL };
+    console.log({ displayName, email, photoURL, password, userProfile });
+
+    // User register on firebase
+    registerUserEmailPassword(email, password)
+      .then((result) => {
+        console.log(result.user);
+        userProfileUpdate(userProfile)
+          .then(() => {
+            console.log("User profile updated successfully");
+            navigate("/");
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
   //
@@ -55,9 +93,17 @@ const RegisterPage = () => {
               <div className="divider">OR</div>
             </div>
             {/*Login form  */}
-            <form>
+            <form onSubmit={handleLoginEmailPassword}>
               <fieldset className="fieldset">
                 {/* email field */}
+                <label className="label text-[16px]">Your Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  className="input w-full"
+                  placeholder="Enter Name"
+                  required
+                />
                 <label className="label text-[16px]">Your email</label>
                 <input
                   type="email"
@@ -70,7 +116,7 @@ const RegisterPage = () => {
                 {/* Photo url */}
                 <label className="label text-[16px]">Photo Url</label>
                 <input
-                  type="email"
+                  type="text"
                   name="photo"
                   className="input w-full"
                   placeholder="Enter photo url"
