@@ -1,23 +1,48 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../Providers/AuthContext";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   // All state
   const [toggleButton, setToggleButton] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
+  // Auth context info
+  const { loginWithGoogle, setLoading } = use(AuthContext);
+
+  // Navigate
+  const navigate = useNavigate();
+
+  // Handle google login
+  const handleGoogleLogin = () => {
+    // setLoading(true);
+    loginWithGoogle()
+      .then(() => {
+        toast.success("User Successfully Login");
+        navigate("/");
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("Google Login Error:", error.message);
+      });
+  };
+
   //
   return (
     <div className="flex items-center justify-center min-h-screen py-5">
       <div className="card bg-base-100 w-full max-w-lg shadow-2xl px-12">
         <div className="card-body">
-          <h2 className="text-2xl font-bold text-center underline">
+          <h2 className="text-2xl font-bold text-center underline py-6">
             Login Your Account
           </h2>
           {/* Google Login */}
           <div>
-            <button className="btn w-full flex items-center justify-center gap-2 mt-3 text-lg">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn w-full flex items-center justify-center gap-2 mt-3 text-[16px]"
+            >
               <img
                 src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                 alt="Google logo"
@@ -33,7 +58,7 @@ const LoginPage = () => {
           {/*Login form  */}
           <form>
             <fieldset className="fieldset">
-              <label className="label text-lg">Your email</label>
+              <label className="label text-[16px]">Your email</label>
               <input
                 type="email"
                 name="email"
@@ -43,7 +68,7 @@ const LoginPage = () => {
               />
 
               <div className={`${toggleButton ? "hidden" : "flex flex-col"}`}>
-                <label className="label text-lg">Password</label>
+                <label className="label text-[16px] mb-1">Password</label>
                 <div className="relative">
                   <input
                     type={showPass ? "text" : "password"}

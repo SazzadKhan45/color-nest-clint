@@ -1,15 +1,33 @@
 import { use } from "react";
 import MyContainer from "../MyContainer";
 import { AuthContext } from "../../Providers/AuthContext";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { Link } from "react-router";
 import { RiMenu2Line } from "react-icons/ri";
 import { ThemeContext } from "../../Providers/ThemeContext";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { user } = use(AuthContext);
+  // All state
   const { isDark, toggleTheme } = use(ThemeContext);
+  // Auth info
+  const { user, loading, logoutUser } = use(AuthContext);
+  // Navigate
+  const navigate = useNavigate();
+
+  // handle logout function
+  const handleLogOut = () => {
+    logoutUser()
+      .then(() => {
+        toast.success("User LogOut successfully");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Sign-out error:", error.message);
+      });
+  };
+
   // NavLinks List
   const Links = (
     <>
@@ -80,9 +98,37 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <Link to="/login" className="btn">
-              Login
-            </Link>
+            {user ? (
+              <div className="dropdown dropdown-bottom dropdown-center">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn m-1 w-12 h-12 p-0 overflow-hidden rounded-full border border-gray-300"
+                >
+                  <img
+                    className="w-full h-full object-cover rounded-full"
+                    src={user?.photoURL}
+                    alt="User Avatar"
+                  />
+                </div>
+
+                <ul
+                  tabIndex="-1"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 py-2 px-6 shadow-sm"
+                >
+                  {/* Handle Logout function */}
+                  <button onClick={handleLogOut} className="cursor-pointer">
+                    LogOut
+                  </button>
+                </ul>
+              </div>
+            ) : loading ? (
+              <span className="loading loading-spinner text-success"></span>
+            ) : (
+              <Link to="/login" className="btn">
+                Login
+              </Link>
+            )}
             <div className="ml-4">
               {isDark ? (
                 <div className="text-[#EBD8BA] shadow">

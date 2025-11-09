@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../Providers/AuthContext";
 
 const RegisterPage = () => {
   // All state
-  const [toggleButton, setToggleButton] = useState(false);
   const [showPass, setShowPass] = useState(false);
+
+  // Auth context info
+  const { loginWithGoogle, setLoading } = use(AuthContext);
+
+  // Navigate
+  const navigate = useNavigate();
+
+  // Handle google login
+  const handleGoogleLogin = () => {
+    // setLoading(true);
+    loginWithGoogle()
+      .then(() => {
+        toast.success("User Successfully Login");
+        navigate("/");
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("Google Login Error:", error.message);
+      });
+  };
   //
   return (
     <div>
@@ -17,7 +38,10 @@ const RegisterPage = () => {
             </h2>
             {/* Google Login */}
             <div>
-              <button className="btn w-full flex items-center justify-center gap-2 mt-3 text-[16px]">
+              <button
+                onClick={handleGoogleLogin}
+                className="btn w-full flex items-center justify-center gap-2 mt-3 text-[16px]"
+              >
                 <img
                   src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                   alt="Google logo"
@@ -53,7 +77,7 @@ const RegisterPage = () => {
                   required
                 />
                 {/* Password */}
-                <div className={`${toggleButton ? "hidden" : "flex flex-col"}`}>
+                <div className="flex flex-col">
                   <label className="label mb-1 text-[16px]">Password</label>
                   <div className="relative">
                     {/* Password filed */}
@@ -77,9 +101,6 @@ const RegisterPage = () => {
                     )}
                   </div>
                 </div>
-                <div
-                  className={`${toggleButton ? "hidden" : "flex flex-col"}`}
-                ></div>
 
                 <button type="submit" className="btn btn-neutral text-lg mt-4">
                   Register
