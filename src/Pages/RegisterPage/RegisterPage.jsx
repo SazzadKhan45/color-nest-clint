@@ -41,7 +41,15 @@ const RegisterPage = () => {
     const displayName = e.target.name.value;
     const email = e.target.email.value;
     const photoURL = e.target.photo.value;
-    const password = e.target.email.value;
+    const password = e.target.password.value;
+
+    // Password validation
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordRegex.test(password)) {
+      toast.error("Use at least 6 characters with upper & lower case letters.");
+      setLoading(false);
+      return;
+    }
 
     // Set displayName & photoUrl
     const userProfile = { displayName, photoURL };
