@@ -10,7 +10,8 @@ const LoginPage = () => {
   const [showPass, setShowPass] = useState(false);
 
   // Auth context info
-  const { loginWithGoogle, setLoading } = use(AuthContext);
+  const { loginWithGoogle, loginUserEmailPassword, setLoading } =
+    use(AuthContext);
 
   // Navigate
   const navigate = useNavigate();
@@ -26,6 +27,29 @@ const LoginPage = () => {
       })
       .catch((error) => {
         console.log("Google Login Error:", error.message);
+      });
+  };
+
+  // Login User email & password
+  const handleLoginEmailPassword = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Get input field values
+    const email = e.target.email.value;
+    const password = e.target.email.value;
+
+    // User login email & password
+    loginUserEmailPassword(email, password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("User Successfully Login");
+        navigate("/");
+        e.target.reset();
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
 
@@ -56,7 +80,7 @@ const LoginPage = () => {
             <div className="divider">OR</div>
           </div>
           {/*Login form  */}
-          <form>
+          <form onSubmit={handleLoginEmailPassword}>
             <fieldset className="fieldset">
               <label className="label text-[16px]">Your email</label>
               <input

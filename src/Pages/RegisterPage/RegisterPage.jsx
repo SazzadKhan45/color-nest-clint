@@ -45,7 +45,6 @@ const RegisterPage = () => {
 
     // Set displayName & photoUrl
     const userProfile = { displayName, photoURL };
-    console.log({ displayName, email, photoURL, password, userProfile });
 
     // User register on firebase
     registerUserEmailPassword(email, password)
@@ -53,8 +52,9 @@ const RegisterPage = () => {
         console.log(result.user);
         userProfileUpdate(userProfile)
           .then(() => {
-            console.log("User profile updated successfully");
+            toast.success("Successfully Register User");
             navigate("/");
+            e.target.reset();
             setLoading(false);
           })
           .catch((error) => {
