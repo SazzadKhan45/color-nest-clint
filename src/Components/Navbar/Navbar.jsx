@@ -21,7 +21,7 @@ const Navbar = () => {
     logoutUser()
       .then(() => {
         toast.success("User LogOut successfully");
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Sign-out error:", error.message);
@@ -33,35 +33,80 @@ const Navbar = () => {
     <>
       <NavLink
         to="/"
-        className="border-b-2 border-transparent hover:border-gray-600"
+        className={({ isActive }) =>
+          `relative px-1 py-1 rounded-md 
+        after:content-[''] after:absolute after:left-0 after:bottom-0 
+        after:h-0.5 after:transition-all after:duration-300 
+        ${
+          isActive
+            ? "after:w-full dark:after:bg-orange-400 font-semibold  dark:text-orange-400"
+            : "after:w-0 after:bg-orange-600 dark:after:bg-orange-400 hover:after:w-full  dark:hover:text-orange-400"
+        }`
+        }
       >
         Home
       </NavLink>
       <NavLink
         to="/explore-Artworks"
-        className="border-b-2 border-transparent hover:border-gray-600"
+        className={({ isActive }) =>
+          `relative px-1 py-1 rounded-md 
+        after:content-[''] after:absolute after:left-0 after:bottom-0 
+        after:h-0.5 after:transition-all after:duration-300 
+        ${
+          isActive
+            ? "after:w-full dark:after:bg-orange-400 font-semibold  dark:text-orange-400"
+            : "after:w-0 after:bg-orange-600 dark:after:bg-orange-400 hover:after:w-full  dark:hover:text-orange-400"
+        }`
+        }
       >
         Explore Artworks
       </NavLink>
       {user && (
         <>
           <NavLink
-            to="/add-Artwork"
-            className="border-b-2 border-transparent hover:border-gray-600"
-          >
-            Add Artwork
-          </NavLink>
-          <NavLink
             to="/my-Gallery"
-            className="border-b-2 border-transparent hover:border-gray-600"
+            className={({ isActive }) =>
+              `relative px-1 py-1 rounded-md 
+        after:content-[''] after:absolute after:left-0 after:bottom-0 
+        after:h-0.5 after:transition-all after:duration-300 
+        ${
+          isActive
+            ? "after:w-full dark:after:bg-orange-400 font-semibold  dark:text-orange-400"
+            : "after:w-0 after:bg-orange-600 dark:after:bg-orange-400 hover:after:w-full  dark:hover:text-orange-400"
+        }`
+            }
           >
             My Gallery
           </NavLink>
           <NavLink
             to="/my-Favorites"
-            className="border-b-2 border-transparent hover:border-gray-600"
+            className={({ isActive }) =>
+              `relative px-1 py-1 rounded-md 
+        after:content-[''] after:absolute after:left-0 after:bottom-0 
+        after:h-0.5 after:transition-all after:duration-300 
+        ${
+          isActive
+            ? "after:w-full dark:after:bg-orange-400 font-semibold  dark:text-orange-400"
+            : "after:w-0 after:bg-orange-600 dark:after:bg-orange-400 hover:after:w-full  dark:hover:text-orange-400"
+        }`
+            }
           >
             My Favorites
+          </NavLink>
+          <NavLink
+            to="/add-Artwork"
+            className={({ isActive }) =>
+              `relative px-1 py-1 rounded-md 
+        after:content-[''] after:absolute after:left-0 after:bottom-0 
+        after:h-0.5 after:transition-all after:duration-300 
+        ${
+          isActive
+            ? "after:w-full dark:after:bg-orange-400 font-semibold  dark:text-orange-400"
+            : "after:w-0 after:bg-orange-600 dark:after:bg-orange-400 hover:after:w-full  dark:hover:text-orange-400"
+        }`
+            }
+          >
+            Add Artwork
           </NavLink>
         </>
       )}
@@ -73,7 +118,7 @@ const Navbar = () => {
       <MyContainer>
         <div className="navbar ">
           <div className="navbar-start">
-            <div className="dropdown">
+            <div className="dropdown ">
               <div
                 tabIndex={0}
                 role="button"
@@ -83,12 +128,15 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow flex space-y-3 pl-6 pb-4 ml-2"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 w-52 p-2 shadow flex space-y-3 pl-6 pb-4 ml-2 mt-3 md:hidden"
               >
                 {Links}
               </ul>
             </div>
-            <Link to="/" className="text-2xl font-medium hidden md:flex">
+            <Link
+              to="/"
+              className="text-lg md:text-xl lg:text-2xl font-medium hidden md:flex"
+            >
               Artify<span className="font-bold">Nest</span>
             </Link>
           </div>

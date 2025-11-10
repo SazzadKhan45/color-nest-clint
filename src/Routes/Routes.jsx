@@ -9,6 +9,7 @@ import PrivateRoutes from "./../PrivateRoutes/PrivateRoutes";
 import AddArtwork from "../Components/AddArtwork/AddArtwork";
 import MyGallery from "../Components/MyGallery/MyGallery";
 import MyFavorites from "../Components/MyFavorites/MyFavorites";
+import ArtDetails from "../Components/ArtDetails/ArtDetails";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,12 @@ const router = createBrowserRouter([
         path: "/explore-Artworks",
         loader: () => fetch("http://localhost:3000/explore-art"),
         Component: ExploreArtwork,
+      },
+      {
+        path: "/artWorks-details/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/explore-art/${params.id}`),
+        Component: ArtDetails,
       },
       {
         path: "/add-Artwork",

@@ -1,11 +1,12 @@
 import React, { use } from "react";
 import { ThemeContext } from "../../Providers/ThemeContext";
 import { BiSolidLike } from "react-icons/bi";
+import { Link } from "react-router";
 
 const ArtWorksCard = ({ art }) => {
   const { isDark } = use(ThemeContext);
-  console.log(art);
   const {
+    _id,
     artImage,
     title,
     description,
@@ -70,7 +71,13 @@ const ArtWorksCard = ({ art }) => {
                 </svg>
               </button>
             </div>
-            <button className="btn btn-outline btn-primary">Art Details</button>
+            {/* Art Details  */}
+            <Link
+              to={`/artWorks-details/${_id}`}
+              className="btn btn-outline btn-primary"
+            >
+              Art Details
+            </Link>
           </div>
         </div>
       </div>

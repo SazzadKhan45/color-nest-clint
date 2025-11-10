@@ -1,6 +1,7 @@
 import { use } from "react";
 import MyContainer from "../MyContainer";
 import ArtWorksCard from "../ArtWorksCard/ArtWorksCard";
+import { Link } from "react-router";
 
 const ArtWorks = ({ promiseArtworks }) => {
   const artWorks = use(promiseArtworks);
@@ -14,7 +15,9 @@ const ArtWorks = ({ promiseArtworks }) => {
           ))}
         </div>
         <h2 className="text-center py-10">
-          <button className="btn">Show All Arts</button>
+          <Link to="/explore-Artworks" className="btn">
+            Show All Arts
+          </Link>
         </h2>
       </MyContainer>
     </div>
