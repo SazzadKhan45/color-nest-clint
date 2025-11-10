@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/explore-Artworks",
+        loader: () => fetch("http://localhost:3000/explore-art"),
         Component: ExploreArtwork,
       },
       {
