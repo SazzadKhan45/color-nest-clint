@@ -3,10 +3,13 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Providers/AuthContext";
+import { ThemeContext } from "./../../Providers/ThemeContext";
 
 const RegisterPage = () => {
   // All state
   const [showPass, setShowPass] = useState(false);
+  // Theme context
+  const { isDark } = use(ThemeContext);
 
   // Auth context info
   const {
@@ -44,9 +47,10 @@ const RegisterPage = () => {
     const password = e.target.password.value;
 
     // Password validation
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
     if (!passwordRegex.test(password)) {
-      toast.error("Use at least 6 characters with upper & lower case letters.");
+      toast.error("Use 6+ chars with upper, lower case letters & a number.");
+
       setLoading(false);
       return;
     }
@@ -75,7 +79,7 @@ const RegisterPage = () => {
   };
   //
   return (
-    <div>
+    <div className={`${isDark ? "bg-gray-900" : "bg-white"}`}>
       <div className="flex items-center justify-center min-h-screen py-5">
         <div className="card bg-base-100 w-full max-w-lg shadow-2xl px-12">
           <div className="card-body">
@@ -156,12 +160,12 @@ const RegisterPage = () => {
                   </div>
                 </div>
 
-                <button type="submit" className="btn btn-neutral text-lg mt-4">
+                <button type="submit" className="btn w-full mt-3 text-[16px]">
                   Register
                 </button>
               </fieldset>
             </form>
-            <p className="text-center py-2">
+            <p className="text-[16px] text-center py-2">
               Already have an account?{" "}
               <span className="ml-1 font-medium cursor-pointer hover:underline text-red-500">
                 <Link to="/login">Login</Link>

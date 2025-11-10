@@ -137,7 +137,7 @@ const LoginPage = () => {
               )}
             </fieldset>
           </form>
-          <p className="text-center py-2">
+          <p className="text-[16px] text-center py-2">
             Already have an account?{" "}
             <span className="ml-1 font-medium cursor-pointer hover:underline text-red-500">
               <Link to="/register">Register</Link>

@@ -69,7 +69,7 @@ const Navbar = () => {
   );
   //
   return (
-    <div className="bg-base-100 shadow-sm">
+    <div className={`shadow-sm ${isDark ? "bg-gray-700" : "bg-base-100"}`}>
       <MyContainer>
         <div className="navbar ">
           <div className="navbar-start">
@@ -83,7 +83,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow flex"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow flex space-y-3 pl-6 pb-4 ml-2"
               >
                 {Links}
               </ul>
@@ -93,7 +93,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="navbar-center hidden md:flex">
-            <ul className="menu menu-horizontal px-1 flex gap-4 lg:text-[16px] font-medium">
+            <ul className="menu menu-horizontal px-1 flex md:gap-4 lg:gap-12 lg:text-[16px] font-medium">
               {Links}
             </ul>
           </div>

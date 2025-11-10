@@ -1,9 +1,12 @@
-import React from "react";
+import React, { use } from "react";
 import MyContainer from "../MyContainer";
+import { ThemeContext } from "../../Providers/ThemeContext";
 
 const Footer = () => {
+  // Theme context
+  const { isDark } = use(ThemeContext);
   return (
-    <div className="bg-base-200">
+    <div className={`${isDark ? "bg-gray-700" : "bg-base-300"}`}>
       <MyContainer>
         <footer className="footer sm:footer-horizontal  text-base-content py-10">
           <nav>
