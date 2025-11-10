@@ -4,7 +4,11 @@ import { BiSolidLike } from "react-icons/bi";
 import { Link } from "react-router";
 
 const ArtWorksCard = ({ art }) => {
+  //
   const { isDark } = use(ThemeContext);
+  //
+
+  //
   const {
     _id,
     artImage,

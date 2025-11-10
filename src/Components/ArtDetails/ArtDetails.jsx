@@ -4,7 +4,9 @@ import { use } from "react";
 import { ThemeContext } from "../../Providers/ThemeContext";
 
 const ArtDetails = () => {
+  // Theme context
   const { isDark } = use(ThemeContext);
+  //   Auth context
   const singleArt = useLoaderData();
   const {
     title,

@@ -30,7 +30,11 @@ const router = createBrowserRouter([
         path: "/artWorks-details/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:3000/explore-art/${params.id}`),
-        Component: ArtDetails,
+        element: (
+          <PrivateRoutes>
+            <ArtDetails />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/add-Artwork",

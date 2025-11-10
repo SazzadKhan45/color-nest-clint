@@ -3,6 +3,7 @@ import ArtWorks from "../../Components/ArtWorks/ArtWorks";
 import HeroSlider from "../../Components/HeroSlider/HeroSlider";
 import MyContainer from "../../Components/MyContainer";
 import { ThemeContext } from "../../Providers/ThemeContext";
+import TopArtists from "../../Components/TopArtists/TopArtists";
 
 const promiseArtworks = fetch("http://localhost:3000/homepage-art").then(
   (res) => res.json()
@@ -38,6 +39,8 @@ const HomePage = () => {
               <ArtWorks promiseArtworks={promiseArtworks} />
             </Suspense>
           </div>
+          {/* Top Artists of the Week */}
+          <TopArtists />
         </main>
       </MyContainer>
     </div>

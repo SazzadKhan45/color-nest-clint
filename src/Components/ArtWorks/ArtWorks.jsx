@@ -14,8 +14,8 @@ const ArtWorks = ({ promiseArtworks }) => {
             <ArtWorksCard key={art._id} art={art} />
           ))}
         </div>
-        <h2 className="text-center py-10">
-          <Link to="/explore-Artworks" className="btn">
+        <h2 className="text-center pt-10">
+          <Link to="/explore-Artworks" className="btn text-[16px] md:px-8">
             Show All Arts
           </Link>
         </h2>
