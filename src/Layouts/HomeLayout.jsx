@@ -6,8 +6,10 @@ import Footer from "../Components/Footer/Footer";
 const HomeLayout = () => {
   return (
     <div>
-      <header>
-        <Navbar />
+      <header className="sticky top-0 z-10">
+        <div>
+          <Navbar />
+        </div>
       </header>
       <main>
         <Outlet />

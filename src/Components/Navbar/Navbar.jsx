@@ -69,7 +69,7 @@ const Navbar = () => {
   );
   //
   return (
-    <div className={`shadow-sm ${isDark ? "bg-gray-700" : "bg-base-100"}`}>
+    <div className={` shadow-sm ${isDark ? "bg-gray-700" : "bg-base-100"}`}>
       <MyContainer>
         <div className="navbar ">
           <div className="navbar-start">
