@@ -13,19 +13,19 @@ const MyContainer = ({ children }) => (
 const HeroSlider = () => {
   const slides = [
     {
-      image: "https://i.ibb.co.com/QFSHCyz8/dlider-1.jpg",
+      image: "https://i.ibb.co.com/CpXg1h4q/dlider-1.jpg",
     },
     {
-      image: "https://i.ibb.co.com/ZRwGjqr7/dlider-2.jpg",
+      image: "https://i.ibb.co.com/2Yhhbmbw/dlider-2.jpg",
     },
     {
-      image: "https://i.ibb.co.com/1fTc2XjX/slider-3.jpg",
+      image: "https://i.ibb.co.com/HfQD8fvr/slider-3.jpg",
     },
     {
-      image: "https://i.ibb.co.com/nsphbHPv/slider-4.jpg",
+      image: "https://i.ibb.co.com/8DNn4hDF/slider-4.jpg",
     },
     {
-      image: "https://i.ibb.co.com/N6JBqxvt/slider-5.jpg",
+      image: "https://i.ibb.co.com/DPwnwksV/slider-5.jpg",
     },
   ];
 

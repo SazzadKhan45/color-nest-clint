@@ -6,7 +6,12 @@ const HomePage = () => {
   return (
     <div className="py-12">
       <MyContainer>
-        <HeroSlider />
+        <header>
+          <HeroSlider />
+        </header>
+        <main>
+          <h2></h2>
+        </main>
       </MyContainer>
     </div>
   );
