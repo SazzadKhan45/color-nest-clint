@@ -2,10 +2,13 @@ import { use, useEffect, useState } from "react";
 import MyContainer from "../MyContainer";
 import GalleyBanner from "../GalleyBanner/GalleyBanner";
 import { AuthContext } from "./../../Providers/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyGallery = () => {
   const [galleryData, setGalleryData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   // Auth info
   const { user } = use(AuthContext);
   //
@@ -19,6 +22,49 @@ const MyGallery = () => {
       });
   }, [user?.email]);
 
+  // Handle delete add gallery
+  const handleAddGalleryRemove = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Make DELETE request only if confirmed
+        axios
+          .delete(`http://localhost:3000/add-gallery/${id}`)
+          .then((res) => {
+            console.log(res.data);
+
+            const newGalleryData = galleryData.filter(
+              (gallery) => gallery.id !== id
+            );
+            setGalleryData(newGalleryData);
+
+            // Show success alert after deletion
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            console.error(error.message);
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+
+  //
   return (
     <div className="px-2 md:px-0 bg-gray-300 pt-4 md:pt-10 min-h-screen">
       <MyContainer>
@@ -29,87 +75,57 @@ const MyGallery = () => {
             Loading...
           </p>
         ) : (
-          <h1 className="text-2xl md:text-3xl font-bold text-center my-4">
-            My Gallery ({galleryData.length})
-          </h1>
+          <div>
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mt-10">
+              My Gallery ({galleryData.length})
+            </h1>
+            <p className="text-justify md:text-center mt-1 mb-10">
+              A vibrant collection showcasing creativity, colors, and emotions,
+              capturing moments that inspire and tell stories.
+            </p>
+          </div>
         )}
-
-        {/* ✅ Responsive Table Wrapper */}
-        <div className="mt-8 overflow-x-auto bg-amber-100 py-4 border border-gray-400 rounded-xl shadow-md mb-10">
-          <table className="table w-full text-sm md:text-base">
-            {/* Table Head */}
-            <thead>
-              <tr className="text-gray-800 text-sm md:text-lg font-semibold bg-amber-200">
-                <th className="p-3">No</th>
-                <th className="p-3">Art Gallery</th>
-                <th className="p-3">User Info</th>
-                <th className="p-3">Action</th>
-              </tr>
-            </thead>
-
-            {/* Table Body */}
-            <tbody>
-              {galleryData.map((art, index) => (
-                <tr
-                  key={art._id}
-                  className="hover:bg-amber-50 transition-all border-b border-gray-300"
-                >
-                  <th className="whitespace-nowrap p-3">{index + 1}</th>
-
-                  {/* Art Gallery Column */}
-                  <td className="min-w-[250px] p-3">
-                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
-                      <div className="avatar">
-                        <div className="h-28 w-28 sm:h-32 sm:w-32 md:h-40 md:w-40 rounded-xl overflow-hidden">
-                          <img
-                            src={art?.artImage}
-                            alt="Art"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                      </div>
-                      <div className="text-center sm:text-left">
-                        <div className="text-base md:text-lg font-semibold">
-                          {art?.title}
-                        </div>
-                        <div className="text-sm text-gray-500">{art?.date}</div>
-                      </div>
+        {/* Show all gallery data */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
+          {galleryData.map((data) => (
+            <div key={data._id}>
+              <div className="card bg-base-100 shadow-sm">
+                <figure className="px-8 pt-8">
+                  <img
+                    src={data?.artImage}
+                    alt={data?.title}
+                    className="rounded-lg h-[200px] lg:h-[350px] w-full"
+                  />
+                </figure>
+                <div className="card-body">
+                  <div>
+                    <h2 className="card-title">{data?.title}</h2>
+                    <p className="mt-1">Date : {data?.date}</p>
+                  </div>
+                  <div className="divider divider-neutral"></div>
+                  <div className="flex  items-center gap-3">
+                    <img
+                      className="h-12 w-12 rounded-full"
+                      src={data?.image}
+                      alt={data.name}
+                    />
+                    <div>
+                      <h4 className="text-lg font-medium">{data.name}</h4>
+                      <p className="text-gray-500">{data.userEmail}</p>
                     </div>
-                  </td>
+                  </div>
 
-                  {/* User Info Column */}
-                  <td className="min-w-[200px] p-3">
-                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
-                      <div className="avatar">
-                        <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-full overflow-hidden">
-                          <img
-                            src={art?.image}
-                            alt={art?.name}
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                      </div>
-                      <div className="text-center sm:text-left">
-                        <div className="text-base md:text-lg font-semibold">
-                          {art?.name}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {art?.userEmail}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-
-                  {/*  Action Column */}
-                  <td className="p-3 text-center">
-                    <button className="btn btn-sm md:btn-md bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md">
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  {/* Remove gallery */}
+                  <button
+                    onClick={() => handleAddGalleryRemove(data?.id)}
+                    className="btn btn-secondary"
+                  >
+                    Remove Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </MyContainer>
     </div>
