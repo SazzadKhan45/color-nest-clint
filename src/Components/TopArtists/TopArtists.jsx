@@ -45,22 +45,24 @@ const TopArtists = () => {
   const { isDark } = useContext(ThemeContext);
 
   return (
-    <div className="py-8">
+    <div className="py-8 px-2 md:px-0">
       <MyContainer>
-        <h2 className="text-lg md:text-3xl text-center font-medium mb-6">
-          Top Artists of the Week
-        </h2>
-        <p
-          className={`text-center mb-6 ${
-            isDark ? "text-gray-300" : "text-gray-600"
-          }`}
-        >
-          Discover the hottest talent with our Top Artists of the Week! From
-          rising stars to established favorites, this curated list showcases the
-          musicians making waves across genres. Explore their unique styles,
-          trending tracks, and artistic journeys, and stay ahead of the music
-          scene with the artists everyone is talking about.
-        </p>
+        <div className="">
+          <h2 className="text-xl md:text-3xl text-center font-medium mb-6">
+            Top Artists of the Week
+          </h2>
+          <p
+            className={`text-justify md:text-center mb-4 md:mb-6 ${
+              isDark ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
+            Discover the hottest talent with our Top Artists of the Week! From
+            rising stars to established favorites, this curated list showcases
+            the musicians making waves across genres. Explore their unique
+            styles, trending tracks, and artistic journeys, and stay ahead of
+            the music scene with the artists everyone is talking about.
+          </p>
+        </div>
 
         <Marquee gradient={false} speed={50} pauseOnHover>
           {artists.map((artist) => (
