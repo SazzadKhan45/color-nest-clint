@@ -29,6 +29,16 @@ const HomePage = () => {
             <h2 className="text-3xl text-center font-medium">
               Most Resent Arts
             </h2>
+            <p
+              className={`text-center mt-4 ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
+              Explore the Most Recent Arts, featuring fresh creations from
+              talented artists worldwide. Discover new styles, innovative
+              techniques, and inspiring masterpieces that capture the essence of
+              modern artistic expression.
+            </p>
             <Suspense
               fallback={
                 <div className="text-center">

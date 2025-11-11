@@ -1,6 +1,6 @@
 import { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Providers/AuthContext";
 import { ThemeContext } from "./../../Providers/ThemeContext";
@@ -21,6 +21,9 @@ const RegisterPage = () => {
 
   // Navigate
   const navigate = useNavigate();
+  const location = useLocation();
+  // Get "from" path
+  const from = location.state?.from || "/";
 
   // Handle google login
   const handleGoogleLogin = () => {
@@ -28,7 +31,7 @@ const RegisterPage = () => {
     loginWithGoogle()
       .then(() => {
         toast.success("User Successfully Login");
-        navigate("/");
+        navigate(from, { replace: true });
         setLoading(false);
       })
       .catch((error) => {
@@ -65,7 +68,7 @@ const RegisterPage = () => {
         userProfileUpdate(userProfile)
           .then(() => {
             toast.success("Successfully Register User");
-            navigate("/");
+            navigate(from, { replace: true });
             e.target.reset();
             setLoading(false);
           })

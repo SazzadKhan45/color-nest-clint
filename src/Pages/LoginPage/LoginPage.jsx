@@ -1,6 +1,6 @@
 import { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthContext";
 import { toast } from "react-toastify";
 
@@ -15,6 +15,9 @@ const LoginPage = () => {
 
   // Navigate
   const navigate = useNavigate();
+  const location = useLocation();
+  // Get "from" path
+  const from = location.state?.from || "/";
 
   // Handle google login
   const handleGoogleLogin = () => {
@@ -22,7 +25,7 @@ const LoginPage = () => {
     loginWithGoogle()
       .then(() => {
         toast.success("User Successfully Login");
-        navigate("/");
+        navigate(from, { replace: true });
         setLoading(false);
       })
       .catch((error) => {

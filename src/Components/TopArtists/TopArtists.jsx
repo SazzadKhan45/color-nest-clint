@@ -5,36 +5,38 @@ import Marquee from "react-fast-marquee";
 
 // Example artist data
 const artists = [
-  { id: 1, name: "Artist One", image: "https://i.ibb.co/Lh6BFRS0/man.jpg" },
-  { id: 2, name: "Artist Two", image: "https://i.ibb.co/Lz0DhxPS/woman.jpg" },
+  {
+    id: 1,
+    name: "Safa Khan",
+    image: "https://i.ibb.co.com/gbTDrWSV/painter-6.jpg",
+  },
+
+  { id: 2, name: "Oscar Rivera", image: "https://i.ibb.co/Lz0DhxPS/woman.jpg" },
   {
     id: 3,
-    name: "Artist Three",
+    name: "Ella Stone",
     image: "https://i.ibb.co/vCWzMm0f/painter-5.jpg",
   },
   {
     id: 4,
-    name: "Artist Four",
+    name: "Liam Anderson",
     image: "https://i.ibb.co/Cs7qkWS7/painter-3.jpg",
   },
   {
     id: 5,
-    name: "Artist Five",
+    name: "Aaron Miller",
     image: "https://i.ibb.co/b5L6PN4X/painter-1.jpg",
   },
   {
-    id: 5,
-    name: "Artist Five",
+    id: 6,
+    name: "Emily Harper",
     image: "https://i.ibb.co.com/5Wy4mcPp/painter-4.jpg",
   },
+  { id: 7, name: "Nora Mitchell", image: "https://i.ibb.co/Lh6BFRS0/man.jpg" },
+
   {
-    id: 5,
-    name: "Artist Five",
-    image: "https://i.ibb.co.com/gbTDrWSV/painter-6.jpg",
-  },
-  {
-    id: 5,
-    name: "Artist Five",
+    id: 8,
+    name: "Micwl Mx",
     image: "https://i.ibb.co.com/JjWvCmHF/painter-2.jpg",
   },
 ];
@@ -48,7 +50,11 @@ const TopArtists = () => {
         <h2 className="text-lg md:text-3xl text-center font-medium mb-6">
           Top Artists of the Week
         </h2>
-        <p className="mb-10 text-justify text-gray-500">
+        <p
+          className={`text-center mb-6 ${
+            isDark ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
           Discover the hottest talent with our Top Artists of the Week! From
           rising stars to established favorites, this curated list showcases the
           musicians making waves across genres. Explore their unique styles,
@@ -70,6 +76,7 @@ const TopArtists = () => {
                 className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover"
               />
               <p className="mt-2 font-medium text-center">{artist.name}</p>
+              <p className="mt-2 text-center">Top : {artist.id}</p>
             </div>
           ))}
         </Marquee>
