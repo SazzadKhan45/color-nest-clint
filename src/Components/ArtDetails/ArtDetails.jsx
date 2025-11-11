@@ -1,12 +1,18 @@
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import MyContainer from "../MyContainer";
 import { use } from "react";
 import { ThemeContext } from "../../Providers/ThemeContext";
+import { AuthContext } from "../../Providers/AuthContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ArtDetails = () => {
   // Theme context
   const { isDark } = use(ThemeContext);
   //   Auth context
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
+  //
   const singleArt = useLoaderData();
   const {
     title,
@@ -19,7 +25,34 @@ const ArtDetails = () => {
     postedAt,
     description,
     email,
+    _id,
   } = singleArt;
+
+  // Add Gallery function
+  const handleAddGallery = () => {
+    //
+    const addGalleryInfo = {
+      id: _id,
+      name: user?.displayName,
+      userEmail: user?.email,
+      image: user?.photoURL,
+      artImage: artImage,
+      title: title,
+      date: postedAt,
+    };
+
+    axios
+      .post("http://localhost:3000/add-gallery", addGalleryInfo)
+      .then((response) => {
+        console.log("Gallery added:", response.data);
+        toast.success("Gallery Added Successfully");
+        console.log({ addGalleryInfo });
+        navigate("/my-Gallery");
+      })
+      .catch((error) => {
+        console.error("Error adding gallery:", error);
+      });
+  };
 
   return (
     <div className={`py-10 px-2 md:px-0  ${isDark ? "" : "bg-gray-100"}`}>
@@ -73,9 +106,13 @@ const ArtDetails = () => {
 
             {/* Buttons */}
             <div className="flex gap-3 mt-4">
-              <button className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition cursor-pointer">
+              <button
+                onClick={handleAddGallery}
+                className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition cursor-pointer"
+              >
                 Add Gallery
               </button>
+              {/* download */}
               <button
                 className={`px-4 py-2 border border-orange-500 text-orange-500 rounded-lg   transition cursor-pointer ${
                   isDark ? "hover:text-white" : "hover:text-black"

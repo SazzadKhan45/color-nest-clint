@@ -4,9 +4,9 @@ import { Link } from "react-router";
 
 const ExpArtBanner = () => {
   return (
-    <div className="mb-10">
+    <div className="mb-10 px-2 md:px-0">
       <div
-        className="rounded-lg bg-cover bg-center h-96 md:h-[500px] flex justify-center items-center"
+        className="rounded-lg bg-cover bg-center h-80 md:h-[400px] lg:h-[500px] flex justify-center items-center"
         style={{
           backgroundImage: "url('https://i.ibb.co/pBkzfmNy/art-banner.jpg')",
         }}
@@ -22,7 +22,7 @@ const ExpArtBanner = () => {
           <button className="btn  my-4">Read More</button>
           {/* Social icons */}
           <div>
-            <div className="flex gap-3 cursor-pointer mt-4">
+            <div className="flex gap-3 cursor-pointer mt-4 text-black">
               {/*  */}
               <Link
                 className="bg-amber-50 p-1 rounded-full"
