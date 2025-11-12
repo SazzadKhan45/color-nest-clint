@@ -43,8 +43,7 @@ const ArtDetails = () => {
 
     axios
       .post("http://localhost:3000/add-gallery", addGalleryInfo)
-      .then((response) => {
-        console.log("Gallery added:", response.data);
+      .then(() => {
         toast.success("Gallery Added Successfully");
         console.log({ addGalleryInfo });
         navigate("/my-Gallery");
@@ -109,7 +108,7 @@ const ArtDetails = () => {
             <div className="flex gap-3 mt-4">
               <button
                 onClick={handleAddGallery}
-                className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition cursor-pointer"
+                className="btn btn-secondary cursor-pointer"
               >
                 Add Gallery
               </button>

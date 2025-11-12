@@ -38,8 +38,8 @@ const MyGallery = () => {
         // Make DELETE request only if confirmed
         axios
           .delete(`http://localhost:3000/add-gallery/${id}`)
-          .then((res) => {
-            console.log(res.data);
+          .then(() => {
+            // console.log(res.data);
 
             const newGalleryData = galleryData.filter(
               (gallery) => gallery.id !== id
@@ -82,8 +82,8 @@ const MyGallery = () => {
           }`}
         >
           {loading ? (
-            <p className="text-center text-lg font-medium text-gray-600">
-              Loading...
+            <p className="text-center my-40 text-green-600">
+              <span className="loading loading-bars loading-xl"></span>
             </p>
           ) : (
             <div className="">
