@@ -1,11 +1,15 @@
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import { ThemeContext } from "../../Providers/ThemeContext";
 import { BiSolidLike } from "react-icons/bi";
 import { FaHeart } from "react-icons/fa";
 import { Link, useLocation } from "react-router";
 import { AuthContext } from "./../../Providers/AuthContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ArtWorksCard = ({ art }) => {
+  //
+  const [isFavorite, setIsFavorite] = useState(false);
   //
   const { isDark } = use(ThemeContext);
   const { user } = use(AuthContext);
@@ -22,6 +26,46 @@ const ArtWorksCard = ({ art }) => {
     category,
     likeCount,
   } = art;
+
+  //
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (favorites.includes(_id)) {
+      setIsFavorite(true);
+    }
+  }, [_id]);
+
+  // Post data from database
+  const handleFavoritesDataPostDatabase = (id) => {
+    console.log(id);
+    // art info
+    const favoritesDataInfo = {
+      artId: _id,
+      name: painterName,
+      email: user?.email,
+      artTitle: title,
+      artCategory: category,
+      image: artImage,
+    };
+
+    // Post data database
+    axios
+      .post("http://localhost:3000/myFavorites", favoritesDataInfo)
+      .then((res) => {
+        console.log("Favorites:", res.data);
+        toast.success("Art Successfully added MyFavorites");
+        setIsFavorite(true);
+        const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        if (!favorites.includes(_id)) {
+          favorites.push(_id);
+          localStorage.setItem("favorites", JSON.stringify(favorites));
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching favorites:", error);
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div
@@ -76,7 +120,12 @@ const ArtWorksCard = ({ art }) => {
 
               {/* Heart Button */}
               {user ? (
-                <button className="btn btn-circle">
+                <button
+                  onClick={() => handleFavoritesDataPostDatabase(_id)}
+                  className={`btn btn-circle ${
+                    isFavorite ? "text-red-500" : ""
+                  }`}
+                >
                   <FaHeart size={20} />
                 </button>
               ) : (
@@ -92,9 +141,10 @@ const ArtWorksCard = ({ art }) => {
 
             {/* Art Details */}
             {user ? (
+              //
               <Link
                 to={`/artWorks-details/${_id}`}
-                className="btn btn-outline btn-primary"
+                className="btn btn-outline btn-secondary"
               >
                 Art Details
               </Link>
@@ -102,7 +152,7 @@ const ArtWorksCard = ({ art }) => {
               <Link
                 to="/register"
                 state={{ from: location.pathname }}
-                className="btn btn-outline btn-primary"
+                className="btn btn-outline btn-secondary"
               >
                 Art Details
               </Link>

@@ -1,9 +1,9 @@
-import React, { use, useState } from "react";
+import { use, useState } from "react";
 import { useLoaderData } from "react-router";
 import MyContainer from "../MyContainer";
 import ArtWorksCard from "../ArtWorksCard/ArtWorksCard";
-import ExpArtBanner from "../ExpArtBanner/ExpArtBanner";
 import { ThemeContext } from "../../Providers/ThemeContext";
+import ExpArtBanner from "./ExpArtBanner";
 
 const ExploreArtwork = () => {
   //

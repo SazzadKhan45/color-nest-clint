@@ -1,10 +1,10 @@
 import { use, useEffect, useState } from "react";
 import MyContainer from "../MyContainer";
-import GalleyBanner from "../GalleyBanner/GalleyBanner";
 import { AuthContext } from "./../../Providers/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ThemeContext } from "./../../Providers/ThemeContext";
+import GalleyBanner from "./GalleyBanner";
 
 const MyGallery = () => {
   const [galleryData, setGalleryData] = useState([]);
@@ -18,7 +18,6 @@ const MyGallery = () => {
     fetch(`http://localhost:3000/add-gallery?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setGalleryData(data);
         setLoading(false);
       });
