@@ -4,13 +4,15 @@ import GalleyBanner from "../GalleyBanner/GalleyBanner";
 import { AuthContext } from "./../../Providers/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { ThemeContext } from "./../../Providers/ThemeContext";
 
 const MyGallery = () => {
   const [galleryData, setGalleryData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Auth info
+  // Context info
   const { user } = use(AuthContext);
+  const { isDark } = use(ThemeContext);
   //
   useEffect(() => {
     fetch(`http://localhost:3000/add-gallery?email=${user?.email}`)
@@ -66,25 +68,36 @@ const MyGallery = () => {
 
   //
   return (
-    <div className="px-2 md:px-0 bg-gray-300 pt-4 md:pt-10 min-h-screen">
+    <div
+      className={`px-2 md:px-0 pt-4 md:pt-10 min-h-screen ${
+        isDark ? "bg-gray-800" : "bg-gray-300"
+      }`}
+    >
+      <title>My Gallery</title>
       <MyContainer>
         <GalleyBanner />
 
-        {loading ? (
-          <p className="text-center text-lg font-medium text-gray-600">
-            Loading...
-          </p>
-        ) : (
-          <div>
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mt-10">
-              My Gallery ({galleryData.length})
-            </h1>
-            <p className="text-justify md:text-center mt-1 mb-10">
-              A vibrant collection showcasing creativity, colors, and emotions,
-              capturing moments that inspire and tell stories.
+        <div
+          className={`rounded px-2 md:px-0 ${
+            isDark ? "bg-gray-900" : "bg-gray-200"
+          }`}
+        >
+          {loading ? (
+            <p className="text-center text-lg font-medium text-gray-600">
+              Loading...
             </p>
-          </div>
-        )}
+          ) : (
+            <div className="">
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mt-10 pt-4">
+                My Gallery ({galleryData.length})
+              </h1>
+              <p className="text-gray-500 text-justify md:text-center mt-1 mb-10 pb-4">
+                A vibrant collection showcasing creativity, colors, and
+                emotions, capturing moments that inspire and tell stories.
+              </p>
+            </div>
+          )}
+        </div>
         {/* Show all gallery data */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
           {galleryData.map((data) => (

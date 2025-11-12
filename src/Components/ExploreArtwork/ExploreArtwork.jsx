@@ -37,8 +37,9 @@ const ExploreArtwork = () => {
   };
 
   return (
-    <div className="py-8">
+    <div className={`py-8 ${isDark ? "bg-gray-900" : "bg-gray-100"}`}>
       <MyContainer>
+        <title>Explore Artworks</title>
         <div>
           <ExpArtBanner />
         </div>

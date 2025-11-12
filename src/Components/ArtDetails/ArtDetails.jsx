@@ -56,6 +56,7 @@ const ArtDetails = () => {
 
   return (
     <div className={`py-10 px-2 md:px-0  ${isDark ? "" : "bg-gray-100"}`}>
+      <title>Art Details</title>
       <MyContainer>
         <div
           className={`max-w-4xl mx-auto shadow-lg rounded-xl overflow-hidden p-4 md:p-10 ${

@@ -56,6 +56,7 @@ const AddArtwork = () => {
         isDark ? "bg-gray-600" : "bg-gray-100"
       }`}
     >
+      <title>Add Artwork</title>
       <MyContainer>
         <h2 className="text-3xl font-semibold mb-6 text-center">
           Add New Artwork

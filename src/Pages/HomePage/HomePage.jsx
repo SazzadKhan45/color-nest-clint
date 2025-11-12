@@ -20,19 +20,24 @@ const HomePage = () => {
           : "bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 text-gray-900"
       }`}
     >
+      <title>Home</title>
       <MyContainer>
         <header>
           <HeroSlider />
         </header>
         <main>
-          <div className="mt-10">
-            <div className="px-2 md:px-0">
+          <div className="mt-10 px-2 md:px-0">
+            <div
+              className={` py-4 rounded px-2 md:px-0 ${
+                isDark ? "bg-gray-900" : "bg-white shadow"
+              }`}
+            >
               <h2 className="text-xl md:text-2xl lg:text-3xl text-center font-medium">
                 Most Resent Arts
               </h2>
               <p
-                className={`text-justify md:text-center mt-4 ${
-                  isDark ? "text-gray-300" : "text-gray-600"
+                className={`text-gray-500 text-justify md:text-center mt-4 ${
+                  isDark ? "" : ""
                 }`}
               >
                 Explore the Most Recent Arts, featuring fresh creations from

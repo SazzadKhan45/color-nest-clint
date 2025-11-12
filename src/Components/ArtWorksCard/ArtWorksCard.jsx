@@ -25,9 +25,7 @@ const ArtWorksCard = ({ art }) => {
 
   return (
     <div
-      className={`card w-96 lg:w-[500px] shadow-sm ${
-        isDark ? "bg-gray-700" : "bg-base-100"
-      }`}
+      className={`card  shadow-sm ${isDark ? "bg-gray-700" : "bg-base-100"}`}
     >
       <div>
         <figure className="px-6 pt-6 h-[250px] md:h-[300px] lg:h-[400px]">
