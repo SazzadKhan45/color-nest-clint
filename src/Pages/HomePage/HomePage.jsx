@@ -1,10 +1,10 @@
 import { Suspense, use } from "react";
 import ArtWorks from "../../Components/ArtWorks/ArtWorks";
-import HeroSlider from "../../Components/HeroSlider/HeroSlider";
 import MyContainer from "../../Components/MyContainer";
 import { ThemeContext } from "../../Providers/ThemeContext";
 import TopArtists from "../../Components/TopArtists/TopArtists";
 import CommunityHighlights from "../../Components/CommunityHighlights/CommunityHighlights";
+import ReactSilder from "../../Components/HeroSlider/ReactSilder";
 
 const promiseArtworks = fetch("http://localhost:3000/homepage-art").then(
   (res) => res.json()
@@ -24,7 +24,7 @@ const HomePage = () => {
       <title>Home</title>
       <MyContainer>
         <header>
-          <HeroSlider />
+          <ReactSilder />
         </header>
         <main>
           <div className="mt-10 px-2 md:px-0">

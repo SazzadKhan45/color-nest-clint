@@ -11,8 +11,6 @@ const MyGallery = () => {
   const [galleryData, setGalleryData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log(galleryData);
-
   // Context info
   const { user } = use(AuthContext);
   const { isDark } = use(ThemeContext);

@@ -1,4 +1,4 @@
-import { use, useEffect } from "react";
+import { use, useEffect, useState } from "react";
 import { ThemeContext } from "../../Providers/ThemeContext";
 import { BiSolidLike } from "react-icons/bi";
 import { FaHeart } from "react-icons/fa";
@@ -11,10 +11,7 @@ import "aos/dist/aos.css";
 
 const ArtWorksCard = ({ art }) => {
   // All state
-  // const [like, setLike] = useState(art.likeCount);
-  // const [liked, setLiked] = useState(
-  //   art.likedBy?.includes(user.email) || false
-  // );
+  const [like, setLike] = useState(art.likeCount || 0);
 
   // All context
   const { isDark } = use(ThemeContext);
@@ -23,12 +20,13 @@ const ArtWorksCard = ({ art }) => {
   // Initialize AOS
   useEffect(() => {
     AOS.init({
-      duration: 800, // animation duration in ms
-      once: true, // animate only once
+      duration: 800,
+      once: true,
       easing: "ease-in-out",
     });
   }, []);
 
+  //
   const {
     _id,
     artImage,
@@ -64,25 +62,19 @@ const ArtWorksCard = ({ art }) => {
   };
 
   // Like handler
-  // const handleArtLikeCount = async () => {
-  //   try {
-  //     const res = await axios.put(
-  //       `https://your-server.com/api/arts/like/${art._id}`,
-  //       { email: user.email }
-  //     );
+  const handleArtLikeCount = (id, email) => {
+    axios
+      .patch(`http://localhost:3000/artData/like/${id}`, { email })
+      .then(() => {
+        setLike((prev) => prev + 1);
+        toast.success("Liked");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
-  //     // if (res.data.liked) {
-  //     //   setLike((prev) => prev + 1);
-  //     //   setLiked(true);
-  //     // } else {
-  //     //   setLike((prev) => prev - 1);
-  //     //   setLiked(false);
-  //     // }
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
+  //
   return (
     <div
       className={`card shadow-sm ${isDark ? "bg-gray-700" : "bg-base-100"}`}
@@ -124,9 +116,11 @@ const ArtWorksCard = ({ art }) => {
             {/* Like Button */}
             {user ? (
               <div className="btn">
-                <button onClick={``} className="flex items-center gap-3">
-                  <BiSolidLike size={25} className="cursor-pointer" />{" "}
-                  {likeCount}
+                <button
+                  onClick={() => handleArtLikeCount(art._id, user.email)}
+                  className="flex items-center gap-3"
+                >
+                  <BiSolidLike size={25} className="cursor-pointer" /> {like}
                 </button>
               </div>
             ) : (

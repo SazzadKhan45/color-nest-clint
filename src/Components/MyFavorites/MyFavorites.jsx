@@ -5,6 +5,7 @@ import { ThemeContext } from "../../Providers/ThemeContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import HeroSlider from "./../HeroSlider/HeroSlider";
 
 const MyFavorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -76,6 +77,9 @@ const MyFavorites = () => {
         </p>
       ) : (
         <MyContainer>
+          <div className="mt-10">
+            <HeroSlider />
+          </div>
           <div
             className={`rounded px-2 md:px-0 my-10 py-4 ${
               isDark ? "bg-gray-900" : "bg-gray-200"
@@ -134,13 +138,12 @@ const MyFavorites = () => {
                   }`}
                 >
                   <div className="flex gap-4 items-center">
-                    <div className="w-full md:w-[50%]">
-                      <img
-                        className="h-32 w-32 rounded-lg"
-                        src={art?.image}
-                        alt={art?.title}
-                      />
-                    </div>
+                    <img
+                      className="h-32 w-32 rounded-lg"
+                      src={art?.image}
+                      alt={art?.title}
+                    />
+
                     <div>
                       <h4 className="text-lg font-medium">
                         Name : {art?.name}
@@ -151,12 +154,12 @@ const MyFavorites = () => {
                           {art?.artCategory}
                         </span>
                       </p>
-                      <p className="text-gray-500 text-justify">
+                      <p className="text-gray-500 text-justify md:pr-10 ">
                         {art?.details}{" "}
                       </p>
                     </div>
                   </div>
-                  <div className="w-full md:w-[50%]">
+                  <div className="w-1/3">
                     <h2 className=" mt-4 md:mt-0 text-right">
                       <button
                         onClick={() => handleMyFavoritesArt(art?.artId)}
