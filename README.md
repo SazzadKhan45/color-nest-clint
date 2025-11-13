@@ -1,16 +1,40 @@
-# React + Vite
+# live link:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# github link: https://github.com/SazzadKhan45/color-nest-clint
 
-Currently, two official plugins are available:
+# Website Name : (ArtifyNest)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# About website :
 
-## React Compiler
+ArtifyNest is an online platform dedicated to artists and art enthusiasts. On this site, painters and creators can showcase their artwork, upload new pieces, and share their creative journey with a global audience. It’s a community where artists can gain recognition, connect with other artists, and inspire others through their unique art styles. Whether you are a professional painter or an emerging artist, ArtifyNest provides a space to display your work, receive feedback, and engage with an art-loving community.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# KeyFeatures
 
-## Expanding the ESLint configuration
+    1. Home page, Explore-Artworks page open all visitor
+    2. My Gallery page, My Favorites page, Add Artwork only visit login User
+    3. User login google & email password
+    4. User upload a new art
+    5. User delete Your own art and Remove user favorites
+    6. User delete any art show confirm modal
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Use Technology
+
+    1. React js
+    2. Express js
+    3. Firebase
+    4. Mongodb
+    5. Tailwind css
+    6. DaisyUi
+    7. vite
+    8. axios
+
+# Use npm Package
+
+    1. React-icons : 5.5.0
+    2. React-fast-marquee: 1.6.5
+    3. React-toastify: 11.0.5
+    4. React-icons : 5.5.0
+    5. React-image-gallery : 1.4.0
+    6. Sweetalert2: 11.26.3
+    7. Swiper : "^12.0.3
+    8. Aos: 2.3.4
