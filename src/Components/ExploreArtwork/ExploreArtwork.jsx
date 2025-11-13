@@ -74,7 +74,9 @@ const ExploreArtwork = () => {
         >
           <h2 className="text-2xl font-bold">
             Explore Artworks{" "}
-            <span className="md:text-xl">({filteredArtworks.length})</span>
+            <span className="md:text-lg text-gray-600">
+              ({filteredArtworks.length})
+            </span>
           </h2>
 
           {/* Live Search Input */}
@@ -126,8 +128,11 @@ const ExploreArtwork = () => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 mt-10" data-aos="fade-in">
-            No artworks found for “{searchTerm}”.
+          <p
+            className="text-xl md:text-2xl font-bold text-center text-gray-500 mt-10"
+            data-aos="fade-in"
+          >
+            No artworks found !
           </p>
         )}
 

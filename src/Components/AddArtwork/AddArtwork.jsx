@@ -4,13 +4,14 @@ import { ThemeContext } from "../../Providers/ThemeContext";
 import { AuthContext } from "../../Providers/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddArtwork = () => {
   // ThemContext
   const { isDark } = use(ThemeContext);
   // AuthContext
   const { user } = use(AuthContext);
-  console.log(user);
+  const navigate = useNavigate();
 
   // Handle form submit
   const handleSubmit = (e) => {
@@ -19,23 +20,25 @@ const AddArtwork = () => {
     const painterName = user?.displayName || "Unknown";
     const email = user?.email || "no-email";
     const title = e.target.title.value;
+    const artImage = e.target.artImage.value;
     const painterImage = user?.photoURL || "";
     const category = e.target.category.value;
-    const artImage = e.target.artImage.value;
+    const postedAt = e.target.postedAt.value;
     const downloadCount = 0;
     const likeCount = 0;
     const description = e.target.description.value;
     //Art info
     const artInfo = {
+      painterName,
       painterImage,
       email,
       title,
       category,
       artImage,
+      postedAt,
       downloadCount,
       likeCount,
       description,
-      painterName,
     };
     //Post art works
     axios
@@ -43,6 +46,8 @@ const AddArtwork = () => {
       .then((res) => {
         console.log(res.data);
         toast.success("Art works is successfully added");
+        navigate("/my-Gallery");
+        e.target.reset();
       })
       .catch((err) => {
         console.error(err);
@@ -58,9 +63,20 @@ const AddArtwork = () => {
     >
       <title>Add Artwork</title>
       <MyContainer>
-        <h2 className="text-3xl font-semibold mb-6 text-center">
-          Add New Artwork
-        </h2>
+        <div
+          className={`px-2 md:px-0 py-4 mb-10 rounded-lg ${
+            isDark ? "bg-gray-800" : "bg-white"
+          }`}
+        >
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-2 text-center">
+            Add New Artwork Info
+          </h2>
+          <p className="text-gray-500 text-justify md:text-center mt-1 px-1">
+            Add details about your new artwork! Share its title, inspiration,
+            medium, and story so viewers can fully appreciate your creativity
+            and artistic vision.
+          </p>
+        </div>
 
         <form
           onSubmit={handleSubmit}
@@ -68,29 +84,60 @@ const AddArtwork = () => {
             isDark ? "bg-gray-800" : "bg-white"
           }`}
         >
-          {/* Your Name */}
-          <div>
-            <label className="block mb-1 font-medium">Your Name</label>
-            <input
-              type="text"
-              name="name"
-              defaultValue={user?.displayName}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-              required
-            />
+          {/* Name & email field */}
+          <div className=" md:flex justify-between items-center md:gap-4">
+            {/* Your Name */}
+            <div className=" md:w-1/2 mb-4 md:mb-0">
+              <label className="block mb-1 font-medium">Your Name</label>
+              <input
+                type="text"
+                name="name"
+                defaultValue={user?.displayName}
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+                required
+              />
+            </div>
+            {/* Email */}
+            <div className=" md:w-1/2">
+              <label className="block  mb-1 font-medium">Your Email</label>
+              <input
+                type="email"
+                name="email"
+                defaultValue={user?.email}
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+                required
+              />
+            </div>
           </div>
-          {/* Email */}
-          <div>
-            <label className="block  mb-1 font-medium">Your Email</label>
-            <input
-              type="email"
-              name="email"
-              defaultValue={user?.email}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-              required
-            />
+          {/* Title & Category */}
+          <div className="md:flex justify-between items-center md:gap-4">
+            {/* PostedAt */}
+            <div className=" md:w-1/2 mb-4 md:mb-0">
+              <label className="block  mb-1 font-medium">Posted At</label>
+              <input
+                type="datetime-local"
+                name="postedAt"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+              />
+            </div>
+            {/* Category */}
+            <div className=" md:w-1/2">
+              <label className="block  mb-1 font-medium">Category</label>
+              <select
+                name="category"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+              >
+                <option value="">Select category</option>
+                <option value="Nature">Nature</option>
+                <option value="Abstract">Abstract</option>
+                <option value="Portrait">Portrait</option>
+                <option value="Digital">Digital</option>
+                <option value="Surreal">Surreal</option>
+              </select>
+            </div>
           </div>
-          {/* Title */}
+          {/*  */}
+
           <div>
             <label className="block  mb-1 font-medium">Artwork Title</label>
             <input
@@ -101,31 +148,7 @@ const AddArtwork = () => {
               required
             />
           </div>
-          {/* Category */}
-          <div>
-            <label className="block  mb-1 font-medium">Category</label>
-            <select
-              name="category"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-            >
-              <option value="">Select category</option>
-              <option value="Nature">Nature</option>
-              <option value="Abstract">Abstract</option>
-              <option value="Portrait">Portrait</option>
-              <option value="Digital">Digital</option>
-              <option value="Surreal">Surreal</option>
-            </select>
-          </div>
 
-          {/* PostedAt */}
-          <div>
-            <label className="block  mb-1 font-medium">Posted At</label>
-            <input
-              type="datetime-local"
-              name="postedAt"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-            />
-          </div>
           {/* Art Image */}
           <div>
             <label className="block mb-1 font-medium">Art Image URL</label>
@@ -136,18 +159,6 @@ const AddArtwork = () => {
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
           </div>
-
-          {/* Painter Image */}
-          <div>
-            <label className="block mb-1 font-medium">Profile Image URL</label>
-            <input
-              type="text"
-              name="painterImage"
-              defaultValue={user?.photoURL}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-            />
-          </div>
-
           {/* Description */}
           <div>
             <label className="block  mb-1 font-medium">Description</label>
@@ -162,7 +173,7 @@ const AddArtwork = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition-all"
+            className="btn btn-success w-full text-lg  text-white font-semibold rounded-xl hover:bg-green-600 transition-all"
           >
             Add Artwork
           </button>

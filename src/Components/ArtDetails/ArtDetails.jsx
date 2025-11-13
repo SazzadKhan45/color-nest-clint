@@ -29,27 +29,26 @@ const ArtDetails = () => {
   } = singleArt;
 
   // Add Gallery function
-  const handleAddGallery = () => {
-    //
-    const addGalleryInfo = {
-      id: _id,
-      name: user?.displayName,
-      userEmail: user?.email,
-      image: user?.photoURL,
-      artImage: artImage,
-      title: title,
-      date: postedAt,
+  const handleFavorites = () => {
+    const favoritesDataInfo = {
+      artId: _id,
+      name: painterName,
+      email: user?.email,
+      artTitle: title,
+      artCategory: category,
+      image: artImage,
+      details: description,
     };
 
     axios
-      .post("http://localhost:3000/add-gallery", addGalleryInfo)
+      .post("http://localhost:3000/myFavorites", favoritesDataInfo)
       .then(() => {
-        toast.success("Gallery Added Successfully");
-        console.log({ addGalleryInfo });
-        navigate("/my-Gallery");
+        toast.success("Art successfully added to My Favorites");
+        navigate("/my-Favorites");
       })
       .catch((error) => {
-        console.error("Error adding gallery:", error);
+        console.error("Error adding favorite:", error);
+        toast.error(error.message);
       });
   };
 
@@ -107,10 +106,10 @@ const ArtDetails = () => {
             {/* Buttons */}
             <div className="flex gap-3 mt-4">
               <button
-                onClick={handleAddGallery}
+                onClick={() => handleFavorites(_id)}
                 className="btn btn-secondary cursor-pointer"
               >
-                Add Gallery
+                Add Favorites
               </button>
               {/* download */}
               <button

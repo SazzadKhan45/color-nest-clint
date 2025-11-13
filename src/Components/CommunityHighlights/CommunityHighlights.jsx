@@ -66,7 +66,7 @@ const CommunityHighlights = () => {
   }, []);
 
   return (
-    <div className="my-10 px-2 md:px-0">
+    <div className="py-10 px-2 md:px-0">
       <MyContainer>
         <div
           className={`mb-10 shadow-sm px-2 py-3 rounded ${
@@ -95,7 +95,7 @@ const CommunityHighlights = () => {
               key={item.id}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className={`flex flex-col items-center shadow-md p-4 rounded-lg transition-transform hover:-translate-y-1 hover:shadow-xl ${
+              className={`flex flex-col items-center shadow-md p-4 rounded-lg transition-transform hover:-translate-y-1 hover:shadow-xl  ${
                 isDark ? "bg-gray-700" : "bg-white"
               }`}
             >

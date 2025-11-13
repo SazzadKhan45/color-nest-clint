@@ -10,6 +10,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const ArtWorksCard = ({ art }) => {
+  // All state
+  // const [like, setLike] = useState(art.likeCount);
+  // const [liked, setLiked] = useState(
+  //   art.likedBy?.includes(user.email) || false
+  // );
+
+  // All context
   const { isDark } = use(ThemeContext);
   const { user } = use(AuthContext);
 
@@ -57,16 +64,31 @@ const ArtWorksCard = ({ art }) => {
   };
 
   // Like handler
-  const handleArtLikeCount = () => {
-    console.log("Like button clicked!");
-  };
+  // const handleArtLikeCount = async () => {
+  //   try {
+  //     const res = await axios.put(
+  //       `https://your-server.com/api/arts/like/${art._id}`,
+  //       { email: user.email }
+  //     );
+
+  //     // if (res.data.liked) {
+  //     //   setLike((prev) => prev + 1);
+  //     //   setLiked(true);
+  //     // } else {
+  //     //   setLike((prev) => prev - 1);
+  //     //   setLiked(false);
+  //     // }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div
       className={`card shadow-sm ${isDark ? "bg-gray-700" : "bg-base-100"}`}
-      data-aos="zoom-in" // 👈 animation type
-      data-aos-delay="100" // 👈 slight delay for smoothness
-      data-aos-once="true" // 👈 ensures it only runs once
+      data-aos="zoom-in"
+      data-aos-delay="100"
+      data-aos-once="true"
     >
       <figure className="px-6 pt-6 h-[250px] md:h-[300px] lg:h-[400px]">
         <img
@@ -102,10 +124,7 @@ const ArtWorksCard = ({ art }) => {
             {/* Like Button */}
             {user ? (
               <div className="btn">
-                <button
-                  onClick={handleArtLikeCount}
-                  className="flex items-center gap-3"
-                >
+                <button onClick={``} className="flex items-center gap-3">
                   <BiSolidLike size={25} className="cursor-pointer" />{" "}
                   {likeCount}
                 </button>

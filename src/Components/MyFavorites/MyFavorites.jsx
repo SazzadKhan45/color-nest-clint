@@ -4,6 +4,7 @@ import MyContainer from "../MyContainer";
 import { ThemeContext } from "../../Providers/ThemeContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyFavorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -80,18 +81,47 @@ const MyFavorites = () => {
               isDark ? "bg-gray-900" : "bg-gray-200"
             }`}
           >
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-center">
-              My Favorites Art
-              <span className="text-lg text-gray-500">
-                ({favorites.length})
-              </span>
-            </h2>
-            <p className="text-gray-500 text-justify md:text-center">
-              My Favorites Art showcases the artworks I love most — unique
-              paintings and creative masterpieces carefully selected for their
-              beauty, emotion, and inspiration, reflecting my personal taste and
-              artistic admiration.
-            </p>
+            {favorites && favorites.length > 0 ? (
+              loading ? (
+                <p className="text-center my-40 text-5xl">
+                  <span className="loading loading-bars loading-xl text-green-600"></span>
+                </p>
+              ) : (
+                <div className="">
+                  <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-center">
+                    My Favorites Art
+                    <span className="text-lg text-gray-500">
+                      ({favorites.length})
+                    </span>
+                  </h2>
+                  <p className="text-gray-500 text-justify md:text-center">
+                    My Favorites Art showcases the artworks I love most — unique
+                    paintings and creative masterpieces carefully selected for
+                    their beauty, emotion, and inspiration, reflecting my
+                    personal taste and artistic admiration.
+                  </p>
+                </div>
+              )
+            ) : (
+              <div className="">
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mt-10 pt-4">
+                  Favorites Art Added Now
+                </h1>
+                <p className="text-gray-500 text-justify md:text-center mt-1 pb-4">
+                  Your favorite artwork has been added! Explore, admire, and
+                  keep track of the pieces that inspire you most in your
+                  personal art collection.
+                </p>
+                <h2 className="text-center">
+                  <Link
+                    to="/explore-Artworks"
+                    className="btn btn-secondary mb-6"
+                  >
+                    Art To Favorites
+                  </Link>
+                </h2>
+              </div>
+            )}
           </div>
 
           {/* Favorites art data load */}

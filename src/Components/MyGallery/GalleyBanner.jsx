@@ -23,7 +23,7 @@ const GalleyBanner = () => {
         </p>
       </div>
       <Link to="/explore-Artworks" className="btn mt-4 ml-2 md:ml-6 lg:ml-20">
-        Add Gallery
+        Explore More Art
       </Link>
     </div>
   );
