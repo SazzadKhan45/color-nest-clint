@@ -68,7 +68,7 @@ const ExploreArtwork = () => {
         {/* Search and header */}
         <div
           data-aos="fade-right"
-          className={`md:flex justify-between items-center mb-6 shadow-sm px-2 py-3 rounded ${
+          className={`md:flex justify-between items-center mb-10 shadow-sm px-2 py-3 rounded ${
             isDark ? "bg-gray-800" : "bg-base-100"
           }`}
         >

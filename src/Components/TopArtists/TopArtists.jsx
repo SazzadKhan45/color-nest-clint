@@ -47,8 +47,12 @@ const TopArtists = () => {
   return (
     <div className="py-8 px-2 md:px-0">
       <MyContainer>
-        <div className="">
-          <h2 className="text-xl md:text-3xl text-center font-medium mb-6">
+        <div
+          className={`mb-10 shadow-sm px-2 py-3 rounded ${
+            isDark ? "bg-gray-800" : "bg-base-100"
+          }`}
+        >
+          <h2 className="text-xl md:text-2xl lg:text-3xl text-center font-medium my-4">
             Top Artists of the Week
           </h2>
           <p

@@ -4,6 +4,7 @@ import HeroSlider from "../../Components/HeroSlider/HeroSlider";
 import MyContainer from "../../Components/MyContainer";
 import { ThemeContext } from "../../Providers/ThemeContext";
 import TopArtists from "../../Components/TopArtists/TopArtists";
+import CommunityHighlights from "../../Components/CommunityHighlights/CommunityHighlights";
 
 const promiseArtworks = fetch("http://localhost:3000/homepage-art").then(
   (res) => res.json()
@@ -58,6 +59,9 @@ const HomePage = () => {
           </div>
           {/* Top Artists of the Week */}
           <TopArtists />
+
+          {/* CommunityHighlights post component */}
+          <CommunityHighlights />
         </main>
       </MyContainer>
     </div>
